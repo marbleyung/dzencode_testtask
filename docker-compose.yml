@@ -1,0 +1,47 @@
+version: '3'
+
+services:
+  backend:
+    build: ./backend
+    command: python manage.py migrate && python manage.py runserver
+    volumes:
+      - ./backend:/server_backend
+      - ./backend/static:/var/www/dzencode/static
+    env_file:
+      - ./backend/.env
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+    networks:
+      - dzencode_internal_network
+
+  postgres:
+    image: postgres:15-alpine
+    env_file:
+      - ./backend/.env
+    expose:
+      - 5432
+    volumes:
+      - pg_data:/var/lib/postgresql/data/
+
+  nginx:
+    image: nginx:1.25.0-alpine
+    depends_on:
+      - backend
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+
+volumes:
+  static:
+  pg_data:
+
+networks:
+  dzencode_internal_network:
+    driver: bridge
+    external: false
+  dzencode_extrenal_network:
+    driver: bridge
+    external: true
