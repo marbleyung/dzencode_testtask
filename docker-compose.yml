@@ -3,45 +3,39 @@ version: '3'
 services:
   backend:
     build: ./backend
-    command: python manage.py migrate && python manage.py runserver
+    command: gunicorn --bind 0.0.0.0:8000 absconfig.wsgi:application
     volumes:
-      - ./backend:/server_backend
-      - ./backend/static:/var/www/dzencode/static
+      - ./backend:/server_backend/
     env_file:
       - ./backend/.env
     ports:
       - "8000:8000"
     depends_on:
-      - postgres
-    networks:
-      - dzencode_internal_network
+      - database
 
-  postgres:
-    image: postgres:15-alpine
+
+  database:
+    image: postgres:14.6-alpine
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
+      - POSTGRES_DB=$${POSTGRES_DB}
+      - POSTGRES_USER=$${POSTGRES_USER}
+      - POSTGRES_PASSWORD=$${POSTGRES_PASSWORD}
     env_file:
       - ./backend/.env
-    expose:
-      - 5432
     volumes:
       - pg_data:/var/lib/postgresql/data/
 
-  nginx:
-    image: nginx:1.25.0-alpine
-    depends_on:
-      - backend
-    ports:
-      - "80:80"
-    volumes:
-      - ./nginx:/etc/nginx/conf.d
+
+#  nginx:
+#    image: nginx:1.25.0-alpine
+#    depends_on:
+#      - backend
+#    ports:
+#      - "80:80"
+#    volumes:
+#      - ./nginx:/etc/nginx/conf.d
 
 volumes:
-  static:
   pg_data:
 
-networks:
-  dzencode_internal_network:
-    driver: bridge
-    external: false
-  dzencode_extrenal_network:
-    driver: bridge
-    external: true
