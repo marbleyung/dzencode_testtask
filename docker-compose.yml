@@ -5,37 +5,39 @@ services:
     build: ./backend
     command: gunicorn --bind 0.0.0.0:8000 absconfig.wsgi:application
     volumes:
-      - ./backend:/server_backend/
+      - ./backend:/backend/
+      - static_volume:/backend/staticfiles/
+      - media_volume:/backend/mediafiles/
     env_file:
       - ./backend/.env
-    ports:
-      - "8000:8000"
+    expose:
+      - 8000
     depends_on:
-      - database
+      - db
 
 
-  database:
+  db:
     image: postgres:14.6-alpine
     environment:
-      - POSTGRES_HOST_AUTH_METHOD=trust
-      - POSTGRES_DB=$${POSTGRES_DB}
-      - POSTGRES_USER=$${POSTGRES_USER}
-      - POSTGRES_PASSWORD=$${POSTGRES_PASSWORD}
-    env_file:
-      - ./backend/.env
+      - POSTGRES_DB=dzencode_db
+      - POSTGRES_USER=dzencode_user
+      - POSTGRES_PASSWORD=dzencode_password
     volumes:
       - pg_data:/var/lib/postgresql/data/
 
 
-#  nginx:
-#    image: nginx:1.25.0-alpine
-#    depends_on:
-#      - backend
-#    ports:
-#      - "80:80"
-#    volumes:
-#      - ./nginx:/etc/nginx/conf.d
+  nginx:
+    image: nginx:1.25.0-alpine
+    depends_on:
+      - backend
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+      - static_volume:/backend/staticfiles/
+      - media_volume:/backend/mediafiles/
 
 volumes:
   pg_data:
-
+  static_volume:
+  media_volume:

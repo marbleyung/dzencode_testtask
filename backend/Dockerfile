@@ -4,15 +4,12 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
 WORKDIR /backend
-
 COPY . .
 
-RUN apk add --no-cache postgresql-client build-base postgresql-dev gcc libc-dev linux-headers
-RUN pip install --no-cache-dir -r reqs.txt
+
+RUN apk update \
+    && apk add postgresql-dev gcc python3-dev musl-dev
+RUN pip install --upgrade pip && pip install -r reqs.txt
 
 
-RUN sed -i 's/\r$//g' /backend/entrypoint.sh && chmod +x /backend/entrypoint.sh
-
-
-ENTRYPOINT ["/backend/entrypoint.sh"]
-
+#ENTRYPOINT ["/backend/entrypoint.sh"]

@@ -58,7 +58,10 @@ def normal_width_and_height(file):
 
 
 def delete_file_from_static(path):
-    from absconfig.settings import BASE_DIR
-    os.remove(str(BASE_DIR) + path)
+    path = path.split('/')[2:]
+    path = '/'.join(path)
+    try:
+        os.remove(f'/backend/mediafiles/{path}')
+    except Exception as e:
+        print(e)
     return True
-
