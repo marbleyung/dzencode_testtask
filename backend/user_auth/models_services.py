@@ -16,9 +16,34 @@ def normal_avatar_size(file):
             params={"Error": 'Error'},)
 
 
+def password_length(instance):
+    if 8 > len(instance) or 20 < len(instance):
+        raise ValidationError(
+            _("Password should contain 8-20 symbols"))
+
+
+
 def username_in_ascii(instance):
     allowed_symbols = string.ascii_letters + string.digits + '_'
     for i in instance:
         if i not in allowed_symbols:
             raise ValidationError(
                 _("You should use only ASCII letters, digits or '_' for username symbols"))
+
+
+def username_underscore_in_the_middle(instance):
+    if instance.startswith('_') or instance.endswith('_'):
+        raise ValidationError(
+            _("Your username can't start/end with '_'"))
+
+
+def username_contains_letters(instance):
+    if instance.isdigit():
+        raise ValidationError(
+            _("Your username should contain letters"))
+
+
+def username_length(instance):
+    if 5 > len(instance) or 20 < len(instance):
+        raise ValidationError(
+            _("Username should contain 5-20 symbols"))

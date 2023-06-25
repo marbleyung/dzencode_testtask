@@ -7,7 +7,7 @@ from .permissions import IsOwnerOrReadOnly
 
 
 class CommentListCreateView(generics.ListCreateAPIView):
-    queryset = Comment.objects.all().order_by('-id')
+    queryset = Comment.objects.all()
     serializer_class = CommentSerializer
     permission_classes = [
         permissions.IsAuthenticatedOrReadOnly,

@@ -4,12 +4,16 @@ from rest_framework import serializers
 
 class CommentSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
+    email = serializers.ReadOnlyField(source='owner.email')
     created = serializers.ReadOnlyField()
+    parent = serializers.ReadOnlyField(source='parent.body')
+
 
     class Meta:
         model = Comment
         fields = ('id',
                   'owner',
+                  'email',
                   'parent',
                   'body',
                   'image',
