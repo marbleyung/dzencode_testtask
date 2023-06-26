@@ -30,7 +30,7 @@ services:
     environment:
       - POSTGRES_DB=dzencode_db
       - POSTGRES_USER=dzencode_user
-      - POSTGRES_PASSWORD=kje9vn28132jijsg
+      - POSTGRES_PASSWORD=dzencode_password
     volumes:
       - pg_data:/var/lib/postgresql/data/
 
