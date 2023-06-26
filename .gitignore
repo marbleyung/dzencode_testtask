@@ -2,7 +2,6 @@
 __pycache__/
 *.py[cod]
 *$py.class
-
 # C extensions
 *.so
 
@@ -153,3 +152,4 @@ dmypy.json
 cython_debug/
 
 .idea/
+node_modules/

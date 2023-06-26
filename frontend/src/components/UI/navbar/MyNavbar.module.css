@@ -1,0 +1,20 @@
+.navbar {
+    height: 50px;
+    width: 99vw;
+    display: flex;
+    align-items: center;
+}
+
+.navbarItems {
+    margin-left: auto;
+    margin-right: 25px;
+    display: flex;
+    gap: 40px;
+}
+
+.navbarLink {
+    text-decoration: none;
+    color: royalblue;
+    font-size: 22px;
+    font-weight: 600;
+}

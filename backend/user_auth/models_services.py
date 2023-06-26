@@ -16,13 +16,6 @@ def normal_avatar_size(file):
             params={"Error": 'Error'},)
 
 
-def password_length(instance):
-    if 8 > len(instance) or 20 < len(instance):
-        raise ValidationError(
-            _("Password should contain 8-20 symbols"))
-
-
-
 def username_in_ascii(instance):
     allowed_symbols = string.ascii_letters + string.digits + '_'
     for i in instance:

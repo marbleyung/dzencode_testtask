@@ -1,0 +1,28 @@
+.myInput {
+    width: inherit;
+    margin: 15px 0px;
+    padding: 5px 10px;
+    font-size: 20px;
+    background: transparent;
+    cursor: text;
+    border: 0;
+    border-bottom: 2px solid #F3EEED;
+    outline: 0;
+    color: #38ef7d;
+}
+
+.myInput:focus {
+    padding-bottom: 6px;  
+    font-weight: 700;
+    border-width: 3px;
+    border-image: linear-gradient(to right, #11998e, #38ef7d);
+    border-image-slice: 1;
+}
+
+.myInput::placeholder {
+    color: #F3EEED;
+}
+
+.myInput:focus::placeholder {
+    color: transparent;
+}

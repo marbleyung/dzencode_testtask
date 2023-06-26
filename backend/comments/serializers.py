@@ -6,7 +6,7 @@ class CommentSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
     email = serializers.ReadOnlyField(source='owner.email')
     created = serializers.ReadOnlyField()
-    parent = serializers.ReadOnlyField(source='parent.body')
+    parent_body = serializers.ReadOnlyField(source='parent.body')
 
 
     class Meta:
@@ -15,6 +15,7 @@ class CommentSerializer(serializers.ModelSerializer):
                   'owner',
                   'email',
                   'parent',
+                  'parent_body',
                   'body',
                   'image',
                   'textfile',

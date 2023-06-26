@@ -107,7 +107,7 @@ REST_FRAMEWORK = {
                                        ),
     'DATETIME_FORMAT': "%Y-%m-%d %H:%M",
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-    'PAGE_SIZE': 25,
+    'PAGE_SIZE': 5,
 }
 
 AUTH_USER_MODEL = 'user_auth.CustomUser'
