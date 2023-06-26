@@ -10,18 +10,18 @@ services:
       - media_volume:/backend/mediafiles/
     env_file:
       - ./backend/.env
-    expose:
-      - 8000
+    ports:
+      - "8000:8000"
     depends_on:
       - db
 
   frontend:
     build: ./frontend
-    command: npm start
+    command: sh -c "npm install && npm start"
     volumes:
       - ./frontend:/frontend/
-    ports:
-      - "5173:5173"
+    expose:
+      - 5173
     depends_on:
       - backend
 
@@ -30,14 +30,14 @@ services:
     environment:
       - POSTGRES_DB=dzencode_db
       - POSTGRES_USER=dzencode_user
-      - POSTGRES_PASSWORD=dzencode_password
+      - POSTGRES_PASSWORD=kje9vn28132jijsg
     volumes:
       - pg_data:/var/lib/postgresql/data/
 
   nginx:
     image: nginx:1.25.0-alpine
     depends_on:
-      - backend
+      - frontend
     ports:
       - "80:80"
     volumes:
