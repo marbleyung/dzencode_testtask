@@ -84,7 +84,6 @@ const LoginForm = () => {
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
-        <div className="password-container">
 
           <MyInput
             type="password"
@@ -96,7 +95,6 @@ const LoginForm = () => {
           <button className="btn btn-show-password" onClick={showPswrd} type="button">
             <FontAwesomeIcon id="password-eye-icon" className="icon" icon={faEye} size="xl" />
           </button>
-        </div>
         <MyButton onClick={handleSubmit} type="submit">Login</MyButton>
       </form>
     </div>

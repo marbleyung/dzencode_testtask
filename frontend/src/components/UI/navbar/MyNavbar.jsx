@@ -36,7 +36,7 @@ const Navbar = () => {
           ? <Link className={classes.navbarLink} to="/signup/">Signup</Link> :
           isUserAuth
             ? <MyButton onClick={logout}>Logout</MyButton>
-            : <div>
+            : <div className="auth-links">
               <Link className={classes.navbarLink} to="/login/">Login</Link>
               <Link className={classes.navbarLink} to="/signup/">Signup</Link>
             </div>

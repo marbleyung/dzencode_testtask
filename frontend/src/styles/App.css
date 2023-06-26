@@ -146,7 +146,7 @@ body {
 }
 
 .registration-container {
-    max-width: 450px;
+    width: 450px;
     display: flex;
     flex-direction: column;
     color: #FF5733;
@@ -156,10 +156,15 @@ body {
     text-align: center;
     color: #F3EEED;
 }
+.registration-inputs {
+    display: flex;
+    flex-direction: column;
+}
 
 .registration-form {
     display: flex;
     flex-direction: column;
+    width: 450px;
 }
 
 .password-container {
@@ -232,4 +237,9 @@ body {
 #body {
     width: inherit;
     min-height: 300px;
+}
+
+.auth-links {
+    display: flex;
+    gap: 40px;
 }

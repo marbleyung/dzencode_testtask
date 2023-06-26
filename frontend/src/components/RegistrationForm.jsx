@@ -130,7 +130,6 @@ const RegistrationForm = () => {
                             )
                             : null
                     }
-                    <div className="password-container">
 
                         <MyInput
                             type="password"
@@ -142,7 +141,6 @@ const RegistrationForm = () => {
                         <button className="btn btn-show-password" onClick={showPswrd} type="button">
                             <FontAwesomeIcon id="password-eye-icon" className="icon" icon={faEye} size="xl" />
                         </button>
-                    </div>
                     {
                         validationErrors.length && validationErrors[2].length
                             ? (
