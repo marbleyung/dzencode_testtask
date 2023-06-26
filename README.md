@@ -9,3 +9,7 @@
 8. `sudo docker container ls`, find the `backend` container
 9. `sudo docker exec -it _backend_id_ python manage.py migrate`
 10. now you should be able to go to http://yourhost:5173
+11. Signup, login and try to create a comment.
+
+_
+The app is very raw and contains a lot of bugs.
