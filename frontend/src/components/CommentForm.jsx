@@ -73,7 +73,6 @@ const CommentForm = (props) => {
         .then((e) => {
           setAccessToken(e);
           Cookies.set('access_token', e)
-          console.log('axiosResponse', axiosResponse)
         })
       const response = await CommentService.postComment(parent, body, image, textFile, accessToken)
       console.log('here is your response1', response, `image: ${image}`, `textfile: ${textFile}`)
