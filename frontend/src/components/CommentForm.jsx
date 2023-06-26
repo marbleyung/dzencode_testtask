@@ -3,10 +3,9 @@ import MyInput from './UI/input/MyInput';
 import MyButton from './UI/button/MyButton';
 import { resizeFile } from '../hooks/useImageResizer';
 import CommentService from '../API/CommentsService';
+import AuthService from '../API/AuthService';
 import Cookies from 'js-cookie';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
 
 const CommentForm = (props) => {
   const [parent, setParent] = useState('');
@@ -70,10 +69,11 @@ const CommentForm = (props) => {
 
 
     if (refreshToken) {
-      const axiosResponse = await axios.post('http://127.0.0.1/api/token/refresh/', { refresh: refreshToken })
+      const axiosResponse = await AuthService.refreshToken(refreshToken)
         .then((e) => {
           setAccessToken(e.data.access);
           Cookies.set('access_token', e.data.access)
+          console.log('axiosResponse', axiosResponse)
         })
       const response = await CommentService.postComment(parent, body, image, textFile, accessToken)
       console.log('here is your response1', response, `image: ${image}`, `textfile: ${textFile}`)

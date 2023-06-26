@@ -1,10 +1,11 @@
 import axios from "axios";
+import { SERVER_URL } from './consts.js';
+
 
 export default class CommentsService {
 
     static async getAllComments(offset = 0) {
-        this.SERVER_URL = `http://127.0.0.1/`
-        this.COMMENTS_URL = `${this.SERVER_URL}api/v1/comments/?offset=${offset}`
+        this.COMMENTS_URL = `${SERVER_URL}api/v1/comments/?offset=${offset}`
         try {
             const response = await axios.get(`${this.COMMENTS_URL}`).then(res => res)
             return response
@@ -14,8 +15,7 @@ export default class CommentsService {
     }
 
     static async getComment(id) {
-        this.SERVER_URL = `http://127.0.0.1/`
-        this.COMMENTS_URL = `${this.SERVER_URL}api/v1/comments/`
+        this.COMMENTS_URL = `${SERVER_URL}api/v1/comments/`
 
         try {
             const response = await axios.get(`${this.COMMENTS_URL}${id}/`).then(res => res)
@@ -27,8 +27,7 @@ export default class CommentsService {
     }
 
     static async getNestedComments(id) {
-        this.SERVER_URL = `http://127.0.0.1/`
-        this.COMMENTS_URL = `${this.SERVER_URL}api/v1/comments/`
+        this.COMMENTS_URL = `${SERVER_URL}api/v1/comments/`
 
         try {
             const response = await axios.get(`${this.COMMENTS_URL}${id}/nested/`).then(res => res)
@@ -40,8 +39,7 @@ export default class CommentsService {
     }
 
     static async postComment(parent, body, image = null, textfile = null, accessToken) {
-        this.SERVER_URL = `http://127.0.0.1/`
-        this.COMMENTS_URL = `${this.SERVER_URL}api/v1/comments/`
+        this.COMMENTS_URL = `${SERVER_URL}api/v1/comments/`
         const data = {
             parent,
             body,
